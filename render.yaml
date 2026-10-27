@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: crazy-clearance-bot
+    runtime: node
+    plan: starter # always on; the free plan sleeps and Meta webhooks would time out
+    region: frankfurt
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: BOT_MODE
+        value: shadow
+      - key: META_APP_ID
+        sync: false
+      - key: META_APP_SECRET
+        sync: false
+      - key: META_VERIFY_TOKEN
+        generateValue: true
+      - key: ACCOUNTS_JSON
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: GOOGLE_SHEET_ID
+        sync: false
+      - key: ADMIN_PASSWORD
+        generateValue: true
+      - key: HANDOFF_WEBHOOK_URL
+        sync: false
